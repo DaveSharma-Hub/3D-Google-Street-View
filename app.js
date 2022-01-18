@@ -1,4 +1,6 @@
+window.addEventListener('resize', onWindowResize);
 
+var camera,renderer;
 function main(){
 
     const canvas = document.querySelector('#world')
@@ -8,15 +10,21 @@ function main(){
     const near = 0.1 //clipping plane, any objects less than near object will disappear
     const far = 2000 //far cliping plane 
 
-    const camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
+    camera = new THREE.PerspectiveCamera(fov,aspect,near,far)
     camera.position.z = 1
 
-    new THREE.OrbitControls(camera,canvas) //required for orbital control
-
-    const renderer = new THREE.WebGLRenderer({ canvas })
+    renderer = new THREE.WebGLRenderer({ canvas })
     const width = canvas.clientWidth
     const height = canvas.clientHeight
 
+    const controls = new THREE.OrbitControls(camera,renderer.domElement) //required for orbital control
+
+    controls.target.set(4.5, 0, 4.5);
+    
+    controls.enablePan = true;
+    controls.maxPolarAngle = Math.PI;
+    
+    controls.enableDamping = true;
     console.log(width)
     console.log(height)
 
@@ -37,10 +45,22 @@ function main(){
         }
     )
     function render(){
+        controls.update();
         renderer.render(scene,camera)
         requestAnimationFrame(render)
     }
-    requestAnimationFrame(render)
-}
 
+    requestAnimationFrame(render)
+
+       
+}
+function onWindowResize() {
+ 
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+   
+    renderer.setSize( window.innerWidth, window.innerHeight );
+   
+  }
 main() //call main function
+
