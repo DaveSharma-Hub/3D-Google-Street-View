@@ -8,4 +8,4 @@ To run the project, download all files
 ```
 Run Live Server or index.html 
 ```
-Source:https://www.youtube.com/watch?v=zOZ8Ah26QOc
+Resources: https://www.youtube.com/watch?v=zOZ8Ah26QOc
