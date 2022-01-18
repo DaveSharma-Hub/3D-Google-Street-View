@@ -22,7 +22,7 @@ function main(){
     controls.target.set(4.5, 0, 4.5);
     
     controls.enablePan = true;
-    controls.maxPolarAngle = Math.PI;
+    controls.maxPolarAngle = Math.PI/2;
     
     controls.enableDamping = true;
     console.log(width)
